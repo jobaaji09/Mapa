@@ -56,13 +56,20 @@ public class GuardaUsuario {
     
     
     public void guardar(){
-        Usuario u = new Usuario();
-        u.setNombre("Actualizame");
-        u.setCorreo(this.correo);
-        u.setFoto("Actualizame");
-        u.setContrasenia(this.contrasenia);
-        u.setFnacimiento(null);
-        this.usuario_bd.guarda(u);
+        
+        Usuario u  = this.usuario_bd.encuentraUsuarioPorCorreo(correo);
+        if(u != null){
+            this.msg = "Ya existe un usuario con ese correo";
+            return;
+        }
+            u= new Usuario();
+            u.setNombre("Actualizame");
+            u.setCorreo(this.correo);
+            u.setFoto("Actualizame");
+            u.setContrasenia(this.contrasenia);
+           // u.setFnacimiento(null);
+            this.usuario_bd.guarda(u);
+            this.msg="Se guardo con exito";
         
         
     }
