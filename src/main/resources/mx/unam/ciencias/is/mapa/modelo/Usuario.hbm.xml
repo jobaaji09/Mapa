@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 26-ene-2019 22:09:28 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="mx.unam.ciencias.is.mapa.modelo.Usuario" table="usuario" optimistic-lock="version">
+        <id name="idusuario" type="int">
+            <column name="idusuario" />
+            <generator class="identity" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" />
+        </property>
+        <property name="foto" type="string">
+            <column name="foto" />
+        </property>
+        <property name="correo" type="string">
+            <column name="correo" />
+        </property>
+        <property name="fnacimiento" type="date">
+            <column name="fnacimiento" length="13" />
+        </property>
+    </class>
+</hibernate-mapping>
