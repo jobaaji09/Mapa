@@ -101,7 +101,7 @@ public abstract class AbstractDAO {
      * @param id el id del objeto en la base de datos
      * @return el objeto que tenga el id en la base de datos si no existe regresa null.
      */
-    protected Object find(Class clazz, Long id) {
+    protected Object find(Class clazz, int id) {
         Object obj = null;
         Session session = sessionFactory.openSession();
         Transaction tx = null;

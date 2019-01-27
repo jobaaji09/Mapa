@@ -16,11 +16,21 @@ public class UsuarioDAO extends AbstractDAO{
         super();
     }
 
-    public Usuario encuentraUSuario(Long id){
+    /**
+     * Metodo que encuentra un usuario.
+     * @param id el id del usuario a encontrar
+     * @return u el usuario encontrado.
+     */
+    public Usuario encuentraUSuario(int id){
         Usuario u = (Usuario)super.find(Usuario.class, id);
         return u;
     }
     
+    /**
+     * Metodo que actualiza un usuario. 
+     * El usuario debe de existir en la base de datos
+     * @param usuario 
+     */
     public void actualizaUsuario(Usuario usuario){
         super.update(usuario);
     }

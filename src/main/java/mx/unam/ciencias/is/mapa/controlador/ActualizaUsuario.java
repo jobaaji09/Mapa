@@ -9,6 +9,7 @@ import java.util.Date;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import mx.unam.ciencias.is.mapa.modelo.Usuario;
+import mx.unam.ciencias.is.mapa.modelo.UsuarioDAO;
 
 /**
  *
@@ -18,17 +19,20 @@ import mx.unam.ciencias.is.mapa.modelo.Usuario;
 @ViewScoped
 public class ActualizaUsuario {
     
-    private int idusuario;
+    private String idusuario;
     private Usuario usuario;
     private String msg;
+    private UsuarioDAO usuario_bd;
 
-    public int getIdusuario() {
+    public String getIdusuario() {
         return idusuario;
     }
 
-    public void setIdusuario(int idusuario) {
+    public void setIdusuario(String idusuario) {
         this.idusuario = idusuario;
     }
+
+    
 
     public Usuario getUsuario() {
         return usuario;
@@ -50,10 +54,16 @@ public class ActualizaUsuario {
     
     public ActualizaUsuario(){
         this.msg = "Como no hay sesion se necesita el id de usuario";
+        this.usuario_bd = new UsuarioDAO();
     }
     
     public void encuentraUsuario(){
-        
+        this.usuario = this.usuario_bd.encuentraUSuario(Integer.parseInt(this.idusuario));
+        try{
+            this.usuario.getIdusuario();
+        }catch(Exception e){
+            this.msg="No hay usuario";
+        }
     }
     
     public void actualiza(){

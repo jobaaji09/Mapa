@@ -15,9 +15,14 @@ and open the template in the editor.
     </h:head>
     <h:body>
         <h:form>
-            <h:outputText value=""/>
+            <h:outputText value="#{actualizaUsuario.msg}"/> <br/>
+            <h:inputText value="#{actualizaUsuario.idusuario}"/> <br/>
+            <h:commandButton action="#{actualizaUsuario.encuentraUsuario()}" value="Encuentrame"/>
         </h:form>
-        
+        <h1>
+            <!--<h:outputText value="{actualizaUsuario.usuario.nombre}"/>-->
+        </h1>
+
         
     </h:body>
 </html>
