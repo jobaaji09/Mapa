@@ -60,6 +60,7 @@ public abstract class AbstractDAO {
         Session session = sessionFactory.openSession();
         Transaction tx = null;
         try {
+            tx = session.beginTransaction();
             session.update(obj);
             tx.commit();
         } catch (HibernateException e) {
@@ -80,7 +81,7 @@ public abstract class AbstractDAO {
         Session session = sessionFactory.openSession();
         Transaction tx = null;
         try {
-            
+            tx = session.beginTransaction();
             session.delete(obj);
             tx.commit();
         } catch (HibernateException e) {
@@ -105,6 +106,7 @@ public abstract class AbstractDAO {
         Session session = sessionFactory.openSession();
         Transaction tx = null;
         try {
+            tx = session.beginTransaction();
             obj = session.load(clazz, id);
             tx.commit();
         } catch (HibernateException e) {
@@ -129,6 +131,7 @@ public abstract class AbstractDAO {
         Session session = sessionFactory.openSession();
         Transaction tx = null;
         try {
+            tx = session.beginTransaction();
             Query query = session.createQuery("from " + clazz.getName());
             objects = query.list();
             tx.commit();
