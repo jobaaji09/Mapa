@@ -5,6 +5,7 @@
  */
 package mx.unam.ciencias.is.mapa.controlador;
 
+import java.io.Serializable;
 import java.util.Date;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -17,7 +18,7 @@ import mx.unam.ciencias.is.mapa.modelo.UsuarioDAO;
  */
 @ManagedBean
 @ViewScoped
-public class ActualizaUsuario {
+public class ActualizaUsuario implements Serializable{
     
     private String idusuario;
     private Usuario usuario;
@@ -59,11 +60,17 @@ public class ActualizaUsuario {
     
     public void encuentraUsuario(){
         this.usuario = this.usuario_bd.encuentraUSuario(Integer.parseInt(this.idusuario));
-        try{
-            this.usuario.getIdusuario();
-        }catch(Exception e){
-            this.msg="No hay usuario";
+        if(this.usuario !=null){
+            System.out.println(this.usuario);
+            this.msg = "El usuario es " + this.usuario.getNombre();
+        }else{
+            this.msg = "El usuario es null";
         }
+//        try{
+//            this.usuario.getIdusuario();
+//        }catch(Exception e){
+//            this.msg="No hay usuario";
+//        }
     }
     
     public void actualiza(){

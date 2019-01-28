@@ -107,7 +107,9 @@ public abstract class AbstractDAO {
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            obj = session.load(clazz, id);
+            //obj = session.load(clazz, id);
+            obj=session.get(clazz, id);
+           
             tx.commit();
         } catch (HibernateException e) {
             if (tx!=null){ 
