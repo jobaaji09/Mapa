@@ -8,21 +8,40 @@ and open the template in the editor.
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>actualiza</title>
+        <title>Actualiza</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </h:head>
     <h:body>
-        <h:form>
-            <h:outputText value="#{actualizaUsuario.msg}"/> <br/>
-            <h:inputText value="#{actualizaUsuario.idusuario}"/> <br/>
-            <h:commandButton action="#{actualizaUsuario.encuentraUsuario()}" value="Encuentrame"/>
-        </h:form>
-        <h1>
-            <h:outputText value="#{actualizaUsuario.usuario.nombre}"/>
-        </h1>
-
+        <header>
+            <h1>Mapa</h1>
+        </header>
+        <main>
+            <section>
+                
+                <h1>
+                    <h:outputText value="#{actualizaUsuario.usuario.nombre}"/>
+                </h1>
+                <h2>Actualizame</h2>
+                <h:form>
+                    <p:inputText value="#{actualizaUsuario.nombre}" placeholder="#{actualizaUsuario.usuario.nombre}"/> <br/>
+                    <p:inputText value="#{actualizaUsuario.correo}" placeholder="#{actualizaUsuario.usuario.correo}"/> <br/>
+                    <p:calendar value="#{actualizaUsuario.fecha}" placeholder="#{actualizaUsuario.usuario.fnacimiento}"/> <br/>
+                    <p:commandButton  value="Actualizar" action="#{actualizaUsuario.actualiza()}"/>
+                    
+                </h:form>
+            </section>
+            <aside>
+                <h:form>
+                    <h:outputText value="#{actualizaUsuario.msg}"/> <br/>
+                    <h:inputText value="#{actualizaUsuario.idusuario}"/> <br/>
+                    <h:commandButton action="#{actualizaUsuario.encuentraUsuario()}" value="Encuentrame"/>
+                </h:form>
+                
+            </aside>
+        </main>
         
     </h:body>
 </html>
