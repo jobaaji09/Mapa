@@ -17,11 +17,11 @@ import org.hibernate.Transaction;
  * @author jonathan
  */
 public abstract class AbstractDAO {
-    
-    
+
+
     protected SessionFactory sessionFactory;
 
-    
+
     /**
      * Constructor de la clase.
      * inicializa la variable sessionFactory para que podamos abrir una session
@@ -29,24 +29,24 @@ public abstract class AbstractDAO {
     public AbstractDAO() {
         this.sessionFactory = HibernateUtil.getSessionFactory();
     }
-    
+
     /**
      * Metodo abtracta para agregar un objeto a la base de datos.
-     * @param obj 
+     * @param obj
      */
     protected void save(Object obj) {
         Session session = sessionFactory.openSession();
         Transaction tx = null;
          try {
-            
+
             tx = session.beginTransaction();
             session.persist(obj);
             tx.commit();
         } catch (HibernateException e) {
-            if (tx!=null){ 
+            if (tx!=null){
                tx.rollback();
             }
-            e.printStackTrace(); 
+            e.printStackTrace();
         } finally {
             session.close();
         }
@@ -54,7 +54,7 @@ public abstract class AbstractDAO {
 
     /**
      * Metodo para actualizar un objeto en la base de datos.
-     * @param obj 
+     * @param obj
      */
     protected void update(Object obj) {
         Session session = sessionFactory.openSession();
@@ -64,7 +64,7 @@ public abstract class AbstractDAO {
             session.update(obj);
             tx.commit();
         } catch (HibernateException e) {
-            if (tx!=null){ 
+            if (tx!=null){
                tx.rollback();
             }
             e.printStackTrace();
@@ -75,7 +75,7 @@ public abstract class AbstractDAO {
 
     /**
      * Metodo que borra un objeto de la base de datos.
-     * @param obj 
+     * @param obj
      */
     protected void delete(Object obj) {
         Session session = sessionFactory.openSession();
@@ -85,7 +85,7 @@ public abstract class AbstractDAO {
             session.delete(obj);
             tx.commit();
         } catch (HibernateException e) {
-            if (tx!=null){ 
+            if (tx!=null){
                tx.rollback();
             }
             e.printStackTrace();
@@ -94,7 +94,7 @@ public abstract class AbstractDAO {
         }
     }
 
-    
+
     /**
      * Metodo que regresa un objeto obtenido de la base de datos
      * @param clazz la clase a la que pertence el objeto
@@ -110,13 +110,13 @@ public abstract class AbstractDAO {
 <<<<<<< HEAD
             //obj = session.load(clazz, id);
             obj=session.get(clazz, id);
-           
+
 =======
             obj = session.load(clazz, id);
 >>>>>>> agrega
             tx.commit();
         } catch (HibernateException e) {
-            if (tx!=null){ 
+            if (tx!=null){
                tx.rollback();
             }
             e.printStackTrace();
@@ -126,7 +126,7 @@ public abstract class AbstractDAO {
         return obj;
     }
 
-    
+
     /**
      * Metodo que regresa un lista de todo los objetos de una misma clase de la base de datos
      * @param clazz la clase a la que pertencen los objetos
@@ -142,7 +142,7 @@ public abstract class AbstractDAO {
             objects = query.list();
             tx.commit();
         } catch (HibernateException e) {
-            if (tx!=null){ 
+            if (tx!=null){
                tx.rollback();
             }
             e.printStackTrace();
@@ -151,5 +151,5 @@ public abstract class AbstractDAO {
         }
         return objects;
     }
-   
+
 }
