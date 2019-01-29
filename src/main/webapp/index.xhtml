@@ -5,13 +5,38 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
-        <title>Facelet Title</title>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+        <h:outputStylesheet name="css/estilos.css"/>
+        <h:outputStylesheet name="css/inicio.css"/>
+        <title>Inicio</title>
     </h:head>
     <h:body>
-        Hello from Facelets
-        <h:link outcome="actualiza" value="Actualiza el perfil"/>
-        <br />
-        <h:link outcome="welcomePrimefaces" value="Primefaces welcome page" />
+
+        <header>
+            <h1>Mapa</h1>
+        </header>
+        <main>
+            <section>
+                <div id="mapa">Mapa</div>
+            </section>
+            <aside>
+                <h2>Se Parte de esto</h2>
+                <h:form>
+                    <h:inputText id="correo" value="#{guardaUsuario.correo}"  /> <br/>
+                    <h:inputSecret id="contrasenia" value="#{guardaUsuario.contrasenia}"/> <br/>
+                    <h:commandButton value="Registrate" action="#{guardaUsuario.guardar()}"/> <br/>
+                </h:form>
+                <h:outputText id="msg" value="#{guardaUsuario.msg}"/>
+                <br/>
+                <h:link outcome="actualiza" value="Actualiza el perfil"/>
+                <br />
+                <h:link outcome="welcomePrimefaces" value="Primefaces welcome page" />
+            </aside>
+        </main>
+        <footer>
+            Pie
+        </footer>
+
     </h:body>
 </html>
-

@@ -1,5 +1,5 @@
 package mx.unam.ciencias.is.mapa.modelo;
-// Generated 26-ene-2019 22:09:27 by Hibernate Tools 4.3.1
+// Generated 27-ene-2019 11:11:22 by Hibernate Tools 4.3.1
 
 
 

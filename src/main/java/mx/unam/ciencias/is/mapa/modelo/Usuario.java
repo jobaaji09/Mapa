@@ -1,5 +1,5 @@
 package mx.unam.ciencias.is.mapa.modelo;
-// Generated 26-ene-2019 22:09:27 by Hibernate Tools 4.3.1
+// Generated 27-ene-2019 11:11:22 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -15,6 +15,7 @@ public class Usuario  implements java.io.Serializable {
      private String foto;
      private String correo;
      private Date fnacimiento;
+     private String contrasenia;
 
     public Usuario() {
     }
@@ -23,12 +24,13 @@ public class Usuario  implements java.io.Serializable {
     public Usuario(int idusuario) {
         this.idusuario = idusuario;
     }
-    public Usuario(int idusuario, String nombre, String foto, String correo, Date fnacimiento) {
+    public Usuario(int idusuario, String nombre, String foto, String correo, Date fnacimiento, String contrasenia) {
        this.idusuario = idusuario;
        this.nombre = nombre;
        this.foto = foto;
        this.correo = correo;
        this.fnacimiento = fnacimiento;
+       this.contrasenia = contrasenia;
     }
    
     public int getIdusuario() {
@@ -65,6 +67,13 @@ public class Usuario  implements java.io.Serializable {
     
     public void setFnacimiento(Date fnacimiento) {
         this.fnacimiento = fnacimiento;
+    }
+    public String getContrasenia() {
+        return this.contrasenia;
+    }
+    
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
     }
 
 

@@ -11,9 +11,15 @@ package mx.unam.ciencias.is.mapa.modelo;
  */
 
 public class UsuarioDAO extends AbstractDAO{
-    
+
     public UsuarioDAO(){
         super();
+    }
+
+
+    public void guarda(Usuario usuario){
+        super.save(usuario);
+
     }
 
     /**
@@ -25,13 +31,37 @@ public class UsuarioDAO extends AbstractDAO{
         Usuario u = (Usuario)super.find(Usuario.class, id);
         return u;
     }
-    
+
     /**
-     * Metodo que actualiza un usuario. 
+     * Metodo que actualiza un usuario.
      * El usuario debe de existir en la base de datos
-     * @param usuario 
+     * @param usuario
      */
     public void actualizaUsuario(Usuario usuario){
         super.update(usuario);
+    }
+    
+    public Usuario encuentraUsuarioPorCorreo(String correo){
+        Usuario usuario = null;
+        Session session = this.sessionFactory.openSession();
+        Transaction tx =null;
+
+        try {
+            tx = session.beginTransaction();
+            String hql = "from Usuario where correo = :correo";
+            Query query  = session.createQuery(hql);
+            query.setParameter("correo", correo);
+            usuario =(Usuario)query.uniqueResult();
+            tx.commit();
+        }catch(HibernateException e){
+            if(tx != null){
+                tx.rollback();
+            }
+            e.printStackTrace();
+        }finally{
+            session.close();
+        }
+        return usuario;
+
     }
 }
