@@ -5,6 +5,11 @@
  */
 package mx.unam.ciencias.is.mapa.modelo;
 
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
 /**
  *
  * @author jonathan
