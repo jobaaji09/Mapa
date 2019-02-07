@@ -46,6 +46,12 @@ public class UsuarioDAO extends AbstractDAO{
         super.update(usuario);
     }
     
+    /**
+     * Metodo que encuantra a un usuario por su correo
+     * @param correo
+     * @return 
+     */
+    
     public Usuario encuentraUsuarioPorCorreo(String correo){
         Usuario usuario = null;
         Session session = this.sessionFactory.openSession();
@@ -69,4 +75,30 @@ public class UsuarioDAO extends AbstractDAO{
         return usuario;
 
     }
+    
+    public Usuario encuentraUsuarioPorCorreoContrasenia(String correo,String contrasenia){
+        Usuario usuario =null;
+        Session session = this.sessionFactory.openSession();
+        Transaction tx = null;
+        try{
+            tx = session.beginTransaction();
+            String hql = "from Usuario u where u.correo = :correo and u.contrasenia = :contrasenia";
+            Query query = session.createQuery(hql);
+            query.setParameter("correo", correo);
+            query.setParameter("contrasenia", contrasenia);
+            usuario = (Usuario)query.uniqueResult();
+            tx.commit();
+        }catch(HibernateException e){
+            if(tx !=null){
+                tx.rollback();
+            }
+            e.printStackTrace();
+        }finally{
+            session.close();
+        }
+        
+        
+        return usuario;
+    }
+    
 }

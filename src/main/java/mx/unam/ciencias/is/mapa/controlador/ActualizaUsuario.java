@@ -7,9 +7,12 @@ package mx.unam.ciencias.is.mapa.controlador;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import mx.unam.ciencias.is.mapa.modelo.Usuario;
 import mx.unam.ciencias.is.mapa.modelo.UsuarioDAO;
 
@@ -21,28 +24,26 @@ import mx.unam.ciencias.is.mapa.modelo.UsuarioDAO;
 @ViewScoped
 public class ActualizaUsuario implements Serializable{
     
-    private String idusuario;
     private String nombre;
+    private String foto;
     private String correo;
-    private Date fecha;
-    private Usuario usuario;
-    private String msg;
-    private UsuarioDAO usuario_bd;
-
-    public String getIdusuario() {
-        return idusuario;
-    }
-
-    public void setIdusuario(String idusuario) {
-        this.idusuario = idusuario;
-    }
-
+    private Date fnacimiento;
+    private String contrasenia;
+    
     public String getNombre() {
         return nombre;
     }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
     }
 
     public String getCorreo() {
@@ -53,58 +54,65 @@ public class ActualizaUsuario implements Serializable{
         this.correo = correo;
     }
 
-    public Date getFecha() {
-        return fecha;
+    public Date getFnacimiento() {
+        return fnacimiento;
     }
 
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
+    public void setFnacimiento(Date fnacimiento) {
+        this.fnacimiento = fnacimiento;
     }
 
-    
-
-    public Usuario getUsuario() {
-        return usuario;
+    public String getContrasenia() {
+        return contrasenia;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-
-    
-    
-    public ActualizaUsuario(){
-        this.msg = "Como no hay sesion se necesita el id de usuario";
-        this.usuario_bd = new UsuarioDAO();
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
     }
     
-    public void encuentraUsuario(){
-        this.usuario = this.usuario_bd.encuentraUsuario(Integer.parseInt(this.idusuario));
-        if(this.usuario !=null){
-            System.out.println(this.usuario);
-            this.msg = "El usuario es " + this.usuario.getNombre();
+    @PostConstruct
+    public void llenaDatos(){
+        UsuarioDAO u_db = new UsuarioDAO();
+        String user = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
+        Usuario u = u_db.encuentraUsuarioPorCorreo(user);
+        //this.contrasenia = u.getContrasenia();
+        this.correo = u.getCorreo();
+        this.fnacimiento = u.getFnacimiento();
+        this.nombre = u.getNombre();
+    }
+     
+    public void actualiza(){
+        UsuarioDAO u_db = new UsuarioDAO();
+        String user = (String) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
+        Usuario u = u_db.encuentraUsuarioPorCorreo(user);
+        int n_actualizados =0;
+        if(!u.getNombre().equals(nombre)){
+            u.setNombre(nombre);
+            n_actualizados++;
+        }
+        if(!u.getCorreo().equals(correo)){
+            u.setCorreo(correo);
+            n_actualizados++;
+        }
+        if(this.fnacimiento!=null){
+            if(this.fnacimiento.compareTo(fnacimiento)!=0){
+                u.setFnacimiento(fnacimiento);
+                n_actualizados++;
+            }
+        }
+        if(!u.getContrasenia().equals(contrasenia)){
+            u.setContrasenia(contrasenia);
+            n_actualizados++;
+        }
+        if(n_actualizados<1){
+            info("No hay nada que actualizar");
         }else{
-            this.msg = "El usuario es null";
+            u_db.actualizaUsuario(u);
+            info("Se a actualizo la informacion " + n_actualizados);
         }
     }
     
-    public void actualiza(){
-        if(this.usuario==null)
-            return;
-        this.usuario.setCorreo(correo);
-        this.usuario.setFnacimiento(fecha);
-        this.usuario.setNombre(nombre);
-        
-        this.usuario_bd.actualizaUsuario(usuario);
-        this.msg = "Usuario actualizado";
-//        return "actualiza?faces-redirect=true";
+    private void info(String mensaje) {
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", mensaje));
     }
 }
