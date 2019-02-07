@@ -3,12 +3,51 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
-    <h:head>
-        <title>Facelet Title</title>
-    </h:head>
-    <h:body>
-        Hello from Facelets
-    </h:body>
-</html>
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <f:view contentType="text/html">
+    
+        <h:head>
+            <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+            <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+            <h:outputStylesheet name="css/estilos.css"/>
+            <h:outputStylesheet name="css/inicio.css"/>
+            <title>Inicio</title>
+        </h:head>
 
+        <h:body>
+
+            <header>
+                <h1>Mapa</h1>
+                <h:link outcome="login" value="login"/>
+            </header>
+            <main>
+                <section>
+                    <div id="mapa">Mapa</div>
+                </section>
+                <aside>
+                    <h2>Se Parte de esto</h2>
+                    <h:form>
+                        <p:messages id="messages" showDetail="true" closable="true">
+                            <p:autoUpdate />
+                        </p:messages>
+                        <p:inputText id="correo" value="#{guardaUsuario.correo}" placeholder="Correo"/> <br/>
+                        <!--<h:inputText id="correo" value="#{guardaUsuario.correo}"  /> <br/>-->
+                        <p:password id="contrasenia" value="#{guardaUsuario.contrasenia}" placeholder="Contrasenia" match="contr" required="true" validatorMessage="No coinciden las contrasenias"/> <br/>
+                        <p:password id="contr" value="#{guardaUsuario.contrasenia}" placeholder="Confirma"  required="true"/> <br/>
+                        <p:commandButton value="Registrate" action="#{guardaUsuario.guardar()}" ajax="false"/> <br/>
+                    </h:form>
+                    
+                    <br/>
+                    
+                    <br />
+                    <h:link outcome="welcomePrimefaces" value="Primefaces welcome page" />
+                </aside>
+            </main>
+            <footer>
+                Pie
+            </footer>
+
+        </h:body>
+    </f:view>
+</html>

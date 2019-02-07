@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <f:view>
+        <h:head>
+            <title>Actualiza</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        </h:head>
+        <h:body>
+            <header>
+                <h1>Mapa</h1>
+            </header>
+            <main>
+                <section>
+
+                    <h1>
+                        <h:outputText value="#{actualizaUsuario.nombre}"/>
+                    </h1>
+
+                    <h:form>
+                        <p:messages  id="messages" showDetail="true" closable="true" >
+                            <p:autoUpdate/>
+                        </p:messages>
+                        <p:inputText value="#{actualizaUsuario.nombre}" placeholder="Nombre"/> <br/>
+                        <p:inputText value="#{actualizaUsuario.correo}" placeholder="Correo"/> <br/>
+                        <p:calendar value="#{actualizaUsuario.fnacimiento}" placeholder="Fecha de nacimiento" navigator="true" pattern="dd-MM-yyyy" mask="true" showOn="button"/> <br/>
+                        <p:password value="#{actualizaUsuario.contrasenia}" placeholder="Contrasenia"  match="contr" validatorMessage="No coinciden las contrasenias"/> <br/>
+                        <p:password id="contr" value="#{guardaUsuario.contrasenia}" placeholder="Confirma" /> <br/>
+                        <p:commandButton  value="Actualizar" action="#{actualizaUsuario.actualiza()}"/>
+
+                    </h:form>
+                </section>
+                <aside>
+    <!--                <h:form>
+                        <h:outputText value="{actualizaUsuario.msg}"/> <br/>
+                        <h:inputText value="{actualizaUsuario.idusuario}"/> <br/>
+                        <h:commandButton action="{actualizaUsuario.encuentraUsuario()}" value="Encuentrame"/>
+                    </h:form>
+                    -->
+                </aside>
+            </main>
+
+        </h:body>
+    </f:view>
+</html>

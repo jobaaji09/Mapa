@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>login</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p:messages id="messages" showDetail="true" closable="true">
+                <p:autoUpdate/>
+            </p:messages>
+            <h:outputText value="Correo"/>
+            <p:inputText value="#{controladorLogin.correo}"   placeholder="Correo"/><br/>
+            <h:outputText value="Contrasena"/>
+            <p:password value="#{controladorLogin.contrasenia}" placeholder="Contrasenia"/> <br/>
+            <p:commandButton value="login" action="#{controladorLogin.login()}" />
+        </h:form>
+    </h:body>
+</html>

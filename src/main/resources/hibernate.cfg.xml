@@ -49,6 +49,7 @@ Contributor(s):
     <property name="hibernate.show_sql">true</property>
     <property name="hibernate.current_session_context_class">thread</property>
     <property name="hibernate.query.factory_class">org.hibernate.hql.internal.classic.ClassicQueryTranslatorFactory</property>
+    <property name="hibernate.enable_lazy_load_no_trans">true</property>
     <mapping resource="mx/unam/ciencias/is/mapa/modelo/Usuario.hbm.xml"/>
     <mapping resource="mx/unam/ciencias/is/mapa/modelo/Marcador.hbm.xml"/>
   </session-factory>
